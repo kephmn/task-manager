@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task Manager</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <%# Soft green-tinted background instead of plain gray — gives the
+      whole app a warm, lively base tone instead of feeling sterile %>
+  <body class="min-h-screen bg-gradient-to-br from-green-50 via-white to-orange-50">
+    <nav class="bg-white border-b border-green-100 px-6 py-4 flex justify-between items-center shadow-sm">
+      <%# Orange accent on the brand name makes it pop against the green nav %>
+      <%= link_to "Task Manager", root_path, class: "font-bold text-lg text-green-800" %>
+      <div class="space-x-4 text-sm text-slate-600">
+        <% if user_signed_in? %>
+          <%= link_to "Projects", projects_path, class: "hover:text-green-700 font-medium" %>
+          <%= button_to "Logout", destroy_user_session_path, method: :delete,
+                class: "hover:text-orange-600 font-medium bg-transparent" %>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: "hover:text-green-700 font-medium" %>
+          <%# Sign up styled as a small filled button since it's the primary CTA for new visitors %>
+          <%= link_to "Sign up", new_user_registration_path,
+                class: "bg-orange-500 text-white px-3 py-1.5 rounded-lg hover:bg-orange-600 transition font-medium" %>
+        <% end %>
+      </div>
+    </nav>
+
+    <% flash.each do |type, message| %>
+      <%# Green for success, orange (not red) for alerts — keeps the
+          whole palette consistent instead of jarring red popping in %>
+      <div class="max-w-3xl mx-auto mt-4 p-3 rounded-lg text-sm border
+        <%= type == "alert" ? "bg-orange-50 text-orange-800 border-orange-200" : "bg-green-50 text-green-800 border-green-200" %>">
+        <%= message %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+<%# Prepends the new task to the top of the #tasks list, and resets
+    the form (by replacing it with a fresh blank one) — all without
+    a page reload %>
+<%= turbo_stream.prepend "tasks", @task %>
+<%= turbo_stream.replace "new_task_form" do %>
+  <%= turbo_frame_tag "new_task_form" do %>
+    <%= render "tasks/form", project: @project, task: @project.tasks.new %>
+  <% end %>
+<% end %>

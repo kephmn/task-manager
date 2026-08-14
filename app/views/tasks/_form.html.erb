@@ -1,0 +1,6 @@
+<%= form_with model: [project, task], class: "flex gap-2 mb-4" do |f| %>
+  <%= f.text_field :title, placeholder: "New task...", class: "flex-1 border rounded p-2" %>
+  <%= f.select :assignee_id, project.members.map { |m| [m.email, m.id] }, { include_blank: "Unassigned" }, class: "border rounded p-2" %>
+  <%= f.datetime_field :due_date, class: "border rounded p-2" %>
+  <%= f.submit "Add", class: "bg-black text-white px-4 rounded" %>
+<% end %>

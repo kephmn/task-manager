@@ -1,0 +1,3 @@
+<%# Just re-renders this one task's partial in place — Turbo finds
+    the existing #task_5 element (via dom_id) and swaps it %>
+<%= turbo_stream.replace @task %>

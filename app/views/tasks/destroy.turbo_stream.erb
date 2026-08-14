@@ -1,0 +1,8 @@
+<%# Rendered inside the same turbo_frame_tag id as the task title,
+    so submitting this form updates just that frame in place %>
+<%= turbo_frame_tag dom_id(task, "title") do %>
+  <%= form_with model: [task.project, task], class: "flex gap-2" do |f| %>
+    <%= f.text_field :title, class: "border rounded p-1 text-sm" %>
+    <%= f.submit "Save", class: "text-xs bg-black text-white px-2 rounded" %>
+  <% end %>
+<% end %>

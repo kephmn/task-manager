@@ -1,0 +1,46 @@
+<div class="max-w-md mx-auto py-16 px-4">
+  <div class="bg-white rounded-xl shadow-lg shadow-orange-100 p-8 border border-green-100">
+    <h1 class="text-2xl font-bold text-green-900 mb-1">Sign up</h1>
+    <p class="text-slate-500 text-sm mb-6">Create an account to get started.</p>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%# Devise's default error_messages partial — kept but will
+          inherit the flash/error styling since it uses standard tags %>
+      <% if resource.errors.any? %>
+        <div class="bg-orange-50 text-orange-800 text-sm p-3 rounded-lg border border-orange-200 mb-5">
+          <ul class="list-disc list-inside">
+            <% resource.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="space-y-5">
+        <div>
+          <%= f.label :email, class: "block text-sm font-medium text-green-900 mb-1" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",
+                class: "w-full border border-green-200 rounded-lg p-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" %>
+        </div>
+
+        <div>
+          <%= f.label :password, class: "block text-sm font-medium text-green-900 mb-1" %>
+          <%= f.password_field :password, autocomplete: "new-password",
+                class: "w-full border border-green-200 rounded-lg p-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" %>
+        </div>
+
+        <div>
+          <%= f.label :password_confirmation, class: "block text-sm font-medium text-green-900 mb-1" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password",
+                class: "w-full border border-green-200 rounded-lg p-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" %>
+        </div>
+
+        <%= f.submit "Sign up", class: "w-full bg-orange-500 text-white font-semibold py-2.5 rounded-lg hover:bg-orange-600 cursor-pointer transition shadow-sm" %>
+      </div>
+    <% end %>
+
+    <div class="mt-6 text-sm text-slate-500">
+      <p><%= link_to "Already have an account? Log in", new_session_path(resource_name), class: "text-green-700 hover:text-orange-600 font-medium" %></p>
+    </div>
+  </div>
+</div>
